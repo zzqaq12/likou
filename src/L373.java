@@ -23,17 +23,20 @@ public class L373 {
     }
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> res = new ArrayList<>();
+        //创建优先队列
         PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)->(b[0]+b[1]) - (a[0]+a[1]));
         for (int i = 0; i < nums1.length && i < k; i++) {
             for (int j = 0; j < nums2.length && j < k; j++) {
                 if (pq.size() < k) {
                     pq.offer(new int[]{nums1[i],nums2[j]});
                 } else {
-                    // 如果队列满了，则比较当前元素和队列中最小的元素，如果当前元素小于队列中最小的元素，则替换队列中最小的元素
+                    // 如果当前元素小于队列中大最的元素，则替换队列中最大的元素
                     if (nums1[i] + nums2[j] < pq.peek()[0] + pq.peek()[1]) {
                        pq.poll();
                        pq.offer(new int[]{nums1[i],nums2[j]});
-                   } else break; //如果当前元素大于队列中最小的元素，则直接退出循环
+                   } else {
+                        break; //如果当前元素大于队列中最大的元素，则直接退出循环
+                    }
                }
            }
        }
