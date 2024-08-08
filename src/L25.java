@@ -7,6 +7,16 @@ public class L25 {
      * 你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。
      */
     public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        ListNode res = reverseKGroup(head, 2);
+        while (res != null) {
+            System.out.println(res.val);
+            res = res.next;
+        }
 
     }
 
@@ -22,10 +32,9 @@ public class L25 {
                     return dummy.next;
                 }
             }
-            ListNode next = tail.next;
-            reverse(cur, tail);
-
+            cur = reverse(cur, tail);
        }
+        return dummy.next;
 
     }
     public static ListNode reverse(ListNode head, ListNode tail) {
@@ -39,7 +48,7 @@ public class L25 {
             head.next = temp;
             temp = cur.next;
         }
-        return tail;
+        return cur;
     }
 
 
